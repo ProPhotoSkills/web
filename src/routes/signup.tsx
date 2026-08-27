@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,15 +24,19 @@ export const Route = createFileRoute("/signup")({
 });
 
 function SignupPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   async function handleEmailSignup(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: window.location.origin },
+    });
     setIsLoading(false);
 
     if (error) {
@@ -40,8 +44,7 @@ function SignupPage() {
       return;
     }
 
-    toast.success("Account erstellt");
-    router.navigate({ to: "/members" });
+    setIsConfirmed(true);
   }
 
   async function handleGoogleSignup() {
@@ -65,55 +68,90 @@ function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleSignup}
-            type="button"
-          >
-            Mit Google fortfahren
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">oder</span>
-            <Separator className="flex-1" />
-          </div>
-
-          <form onSubmit={handleEmailSignup} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">E-Mail</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="du@beispiel.de"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+          {isConfirmed ? (
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <svg
+                  className="h-6 w-6 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">
+                Bestätige deine E-Mail
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Wir haben dir einen Link an <strong>{email}</strong> geschickt.
+                Klicke darauf, um deinen Account zu aktivieren.
+              </p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Bereits bestätigt?{" "}
+                <Link to="/login" className="font-medium text-primary hover:underline">
+                  Hier anmelden
+                </Link>
+              </p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Passwort</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Wird erstellt..." : "Account erstellen"}
-            </Button>
-          </form>
+          ) : (
+            <>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={handleGoogleSignup}
+                type="button"
+              >
+                Mit Google fortfahren
+              </Button>
 
-          <p className="text-center text-sm text-muted-foreground">
-            Bereits registriert?{" "}
-            <Link to="/login" className="font-medium text-primary hover:underline">
-              Hier anmelden
-            </Link>
-          </p>
+              <div className="flex items-center gap-3">
+                <Separator className="flex-1" />
+                <span className="text-xs text-muted-foreground">oder</span>
+                <Separator className="flex-1" />
+              </div>
+
+              <form onSubmit={handleEmailSignup} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">E-Mail</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="du@beispiel.de"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Passwort</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Wird erstellt..." : "Account erstellen"}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground">
+                Bereits registriert?{" "}
+                <Link to="/login" className="font-medium text-primary hover:underline">
+                  Hier anmelden
+                </Link>
+              </p>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
