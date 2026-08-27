@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Shield, Clock, ArrowLeft } from "lucide-react";
+import { Check, Shield, Clock, ArrowLeft, Mail } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/checkout")({
@@ -29,8 +29,8 @@ const features = [
 ];
 
 function CheckoutPage() {
-  function handleCheckout() {
-    toast.info("Zahlungsanbieter wird in Kürze aktiviert.");
+  function handleNotifyMe() {
+    toast.success("Wir benachrichtigen dich, sobald der Kauf live ist.");
   }
 
   return (
@@ -88,12 +88,12 @@ function CheckoutPage() {
                 <span className="text-5xl font-extrabold text-foreground">€299</span>
                 <span className="text-muted-foreground"> / einmalig</span>
               </div>
-              <Button className="w-full" size="lg" onClick={handleCheckout}>
-                <Clock className="mr-2 h-4 w-4" />
-                Jetzt bezahlen
+              <Button className="w-full" size="lg" onClick={handleNotifyMe}>
+                <Mail className="mr-2 h-4 w-4" />
+                Benachrichtige mich
               </Button>
               <p className="text-center text-xs text-muted-foreground">
-                Du erhältst sofort nach Zahlungsbestätigung Zugriff.
+                Die Zahlungsabwicklung wird in Kürze hinzugefügt.
               </p>
             </CardContent>
           </Card>
