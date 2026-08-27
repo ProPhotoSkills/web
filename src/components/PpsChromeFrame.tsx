@@ -1,0 +1,68 @@
+import { useEffect, useRef, useState } from "react";
+
+const PPS_CSS = "https://prophotoskills.github.io/content/css/pps-site.css";
+const PPS_FONTS =
+  "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap";
+
+/**
+ * Renders the original ProPhotoSkills header/footer markup 1:1 inside an
+ * isolated document, loading the original site stylesheet. This keeps the
+ * chrome pixel-identical to prophotoskills.github.io/content and prevents any
+ * CSS bleed in either direction.
+ */
+export function PpsChromeFrame({
+  html,
+  title,
+  extraCss = "",
+}: {
+  html: string;
+  title: string;
+  extraCss?: string;
+}) {
+  const ref = useRef<HTMLIFrameElement>(null);
+  const [height, setHeight] = useState(title === "Footer" ? 300 : 110);
+
+  const doc = `<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<base href="https://prophotoskills.github.io/content/" target="_parent">
+<link rel="stylesheet" href="${PPS_FONTS}">
+<link rel="stylesheet" href="${PPS_CSS}">
+<style>html,body{margin:0;padding:0;overflow-x:hidden}${extraCss}</style>
+</head><body class="et-tb et-tb-has-header et-tb-has-footer">
+<div id="page-container"><div id="et-boc" class="et-boc">${html}</div></div>
+</body></html>`;
+
+  useEffect(() => {
+    const frame = ref.current;
+    if (!frame) return;
+
+    const measure = () => {
+      const body = frame.contentDocument?.body;
+      if (!body) return;
+      const next = Math.ceil(
+        Math.max(body.scrollHeight, body.getBoundingClientRect().height),
+      );
+      if (next > 0) setHeight(next);
+    };
+
+    frame.addEventListener("load", measure);
+    const interval = window.setInterval(measure, 500);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      frame.removeEventListener("load", measure);
+      window.clearInterval(interval);
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  return (
+    <iframe
+      ref={ref}
+      title={title}
+      srcDoc={doc}
+      scrolling="no"
+      style={{ width: "100%", height, border: 0, display: "block" }}
+    />
+  );
+}
