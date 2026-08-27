@@ -52,6 +52,13 @@
   --color-insurance: var(--insurance);
   --color-equipment: var(--equipment);
 
+  /* Site chrome (PPS header/footer) */
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-muted: var(--footer-muted);
+  --color-brand-red: var(--brand-red);
+
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -104,6 +111,13 @@
   --location: oklch(0.5 0.1 30);
   --insurance: oklch(0.55 0.09 260);
   --equipment: oklch(0.5 0.08 220);
+
+  /* Site chrome: near-black PPS ink footer + brand red accent */
+  --footer: oklch(0.18 0.012 190);
+  --footer-foreground: oklch(0.98 0 0);
+  --footer-muted: oklch(0.78 0.005 190);
+  --brand-red: oklch(0.63 0.17 22);
+
 
   --chart-1: var(--knowledge);
   --chart-2: var(--technik);
