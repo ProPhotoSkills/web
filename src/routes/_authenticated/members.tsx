@@ -59,14 +59,15 @@ function MembersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
-
     async function loadAccess() {
+      const currentUser = user;
+      if (!currentUser) return;
+
       setLoading(true);
       const { data, error } = await supabase
         .from("user_access")
         .select("id, user_id, has_access")
-        .eq("user_id", user.id)
+        .eq("user_id", currentUser.id)
         .maybeSingle();
 
       if (error) {
@@ -80,7 +81,7 @@ function MembersPage() {
       } else {
         const { data: created, error: insertError } = await supabase
           .from("user_access")
-          .insert({ user_id: user.id, has_access: false })
+          .insert({ user_id: currentUser.id, has_access: false })
           .select("id, user_id, has_access")
           .single();
 
