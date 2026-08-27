@@ -5,5 +5,5 @@ import { PPS_FOOTER_HTML } from "@/components/pps-chrome-html";
  * Styling comes from pps-site.css (loaded in __root.tsx).
  */
 export function Footer() {
-  return <div dangerouslySetInnerHTML={{ __html: PPS_FOOTER_HTML }} />;
+  return <div className="pps-chrome" dangerouslySetInnerHTML={{ __html: PPS_FOOTER_HTML }} />;
 }

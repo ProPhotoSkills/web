@@ -5,5 +5,5 @@ import { PPS_HEADER_HTML } from "@/components/pps-chrome-html";
  * Styling comes from pps-site.css (loaded in __root.tsx).
  */
 export function Header() {
-  return <div dangerouslySetInnerHTML={{ __html: PPS_HEADER_HTML }} />;
+  return <div className="pps-chrome" dangerouslySetInnerHTML={{ __html: PPS_HEADER_HTML }} />;
 }
