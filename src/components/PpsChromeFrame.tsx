@@ -30,6 +30,7 @@ export function PpsChromeFrame({
 <style>html,body{margin:0;padding:0;overflow-x:hidden}${extraCss}</style>
 </head><body class="et-tb et-tb-has-header et-tb-has-footer">
 <div id="page-container"><div id="et-boc" class="et-boc">${html}</div></div>
+<script src="https://prophotoskills.github.io/content/js/pps-site.js" defer></script>
 </body></html>`;
 
   useEffect(() => {
