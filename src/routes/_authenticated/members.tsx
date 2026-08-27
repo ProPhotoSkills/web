@@ -59,10 +59,10 @@ function MembersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const currentUser = user;
-    if (!currentUser) return;
-
     async function loadAccess() {
+      const currentUser = user;
+      if (!currentUser) return;
+
       setLoading(true);
       const { data, error } = await supabase
         .from("user_access")
