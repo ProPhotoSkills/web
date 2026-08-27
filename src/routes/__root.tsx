@@ -117,13 +117,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      {
-        rel: "stylesheet",
-        href: "/pps-chrome.css",
-      },
-    ],
-    scripts: [
-      { src: "https://prophotoskills.github.io/content/js/pps-site.js", defer: true },
     ],
   }),
   shellComponent: RootShell,
@@ -171,16 +164,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div id="page-container">
-        <div id="et-boc" className="et-boc">
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1" id="et-main-area">
-              <Outlet />
-            </main>
-            <Footer />
-          </div>
-        </div>
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
       <Toaster />
     </QueryClientProvider>

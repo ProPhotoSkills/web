@@ -1,9 +1,7 @@
 import { PPS_FOOTER_HTML } from "@/components/pps-chrome-html";
+import { PpsChromeFrame } from "@/components/PpsChromeFrame";
 
-/**
- * Exact ProPhotoSkills footer from the content repo, rendered 1:1.
- * Styling comes from pps-site.css (loaded in __root.tsx).
- */
+/** Exact ProPhotoSkills footer, rendered 1:1 from the content repo. */
 export function Footer() {
-  return <div className="pps-chrome" dangerouslySetInnerHTML={{ __html: PPS_FOOTER_HTML }} />;
+  return <PpsChromeFrame title="Footer" html={PPS_FOOTER_HTML} />;
 }
