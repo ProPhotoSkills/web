@@ -119,7 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       {
         rel: "stylesheet",
-        href: "https://prophotoskills.github.io/content/css/pps-site.css",
+        href: "/pps-chrome.css",
       },
     ],
     scripts: [
