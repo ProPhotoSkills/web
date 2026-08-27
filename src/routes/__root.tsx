@@ -117,6 +117,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "stylesheet",
+        href: "https://prophotoskills.github.io/content/css/pps-site.css",
+      },
+    ],
+    scripts: [
+      { src: "https://prophotoskills.github.io/content/js/pps-site.js", defer: true },
     ],
   }),
   shellComponent: RootShell,
