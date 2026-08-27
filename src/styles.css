@@ -112,6 +112,13 @@
   --insurance: oklch(0.55 0.09 260);
   --equipment: oklch(0.5 0.08 220);
 
+  /* Site chrome: near-black PPS ink footer + brand red accent */
+  --footer: oklch(0.18 0.012 190);
+  --footer-foreground: oklch(0.98 0 0);
+  --footer-muted: oklch(0.78 0.005 190);
+  --brand-red: oklch(0.63 0.17 22);
+
+
   --chart-1: var(--knowledge);
   --chart-2: var(--technik);
   --chart-3: var(--progress);
