@@ -46,7 +46,6 @@ export function Header() {
               key={m.label}
               href={m.href}
               className="text-[11px] font-extrabold tracking-wide text-muted-foreground transition-colors hover:text-foreground"
-              style={{ ["--hover" as string]: m.color }}
             >
               <span style={{ borderBottom: `2px solid ${m.color}` }}>{m.label}</span>
             </a>
