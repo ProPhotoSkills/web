@@ -76,8 +76,15 @@ function GatePage() {
   }
 
   return (
-    <div className="container-pps flex flex-1 items-center justify-center py-16">
-      <Card className="w-full max-w-md">
+    <div
+      className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom, color-mix(in oklab, var(--background) 45%, transparent), color-mix(in oklab, var(--background) 65%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
+      }}
+    >
+      <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
+
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Willkommen bei ProPhotoSkills</CardTitle>
           <CardDescription>
