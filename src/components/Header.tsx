@@ -107,22 +107,29 @@ export function Header() {
           />
         </a>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <div className="mr-1 flex items-center gap-0.5 sm:gap-1">
+          <div className="mr-1 flex items-center">
             {LANGS.map((l) => (
-              <button
+              <a
                 key={l.code}
-                type="button"
-                onClick={() => selectLanguage(l.code)}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  selectLanguage(l.code);
+                }}
                 title={l.label}
-                aria-label={l.label}
-                className={`rounded px-0.5 text-base leading-none transition-opacity hover:opacity-100 ${
-                  lang === l.code ? "opacity-100 ring-1 ring-black/40" : "opacity-60"
-                }`}
               >
-                {l.flag}
-              </button>
+                <img
+                  src={`https://prophotoskills.github.io/pps-assets/images/${l.code}.svg`}
+                  alt={l.label}
+                  width={20}
+                  height={14}
+                  style={{ borderRadius: 2, margin: "0 2px" }}
+                  className={lang === l.code ? "opacity-100" : "opacity-100"}
+                />
+              </a>
             ))}
           </div>
+
 
           <a
             href="https://memberabo.prophotoskills.com/"
