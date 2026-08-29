@@ -68,6 +68,7 @@ function LoginPage() {
     <div
       className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
       style={{
+        marginTop: -1,
         backgroundImage:
           "linear-gradient(to bottom, color-mix(in oklab, var(--background) 45%, transparent), color-mix(in oklab, var(--background) 65%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
       }}
