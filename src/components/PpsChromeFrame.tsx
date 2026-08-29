@@ -38,7 +38,7 @@ export function PpsChromeFrame({
 <base href="https://prophotoskills.github.io/content/" target="_parent">
 <link rel="stylesheet" href="${PPS_FONTS}">
 <link rel="stylesheet" href="${origin}${PPS_CSS_PATH}">
-<style>html,body{margin:0;padding:0;overflow-x:hidden}${extraCss}</style>
+<style>html,body{margin:0;padding:0;overflow-x:hidden;background:${title === "Footer" ? "#4a4a4a" : "#f8e800"}}${extraCss}</style>
 </head><body class="et-tb et-tb-has-header et-tb-has-footer">
 <div id="page-container"><div id="et-boc" class="et-boc">${html}</div></div>
 <script src="${origin}${PPS_JS_PATH}" defer></script>
