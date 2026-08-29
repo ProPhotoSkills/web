@@ -1,15 +1,100 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+
+const LANGS = [
+  { code: "de", flag: "🇩🇪", label: "Deutsch" },
+  { code: "en", flag: "🇬🇧", label: "English" },
+  { code: "fr", flag: "🇫🇷", label: "Français" },
+  { code: "es", flag: "🇪🇸", label: "Español" },
+  { code: "pt", flag: "🇵🇹", label: "Português" },
+  { code: "it", flag: "🇮🇹", label: "Italiano" },
+  { code: "el", flag: "🇬🇷", label: "Ελληνικά" },
+  { code: "ja", flag: "🇯🇵", label: "日本語" },
+] as const;
+
+declare global {
+  interface Window {
+    googleTranslateElementInit?: () => void;
+    google?: any;
+  }
+}
+
+function loadTranslate(lang: string) {
+  const apply = () => {
+    let tries = 0;
+    const iv = setInterval(() => {
+      const combo = document.querySelector<HTMLSelectElement>("select.goog-te-combo");
+      if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+        clearInterval(iv);
+      }
+      if (++tries > 40) clearInterval(iv);
+    }, 250);
+  };
+
+  if (window.google?.translate) {
+    apply();
+    return;
+  }
+
+  if (!document.getElementById("google_translate_element")) {
+    const holder = document.createElement("div");
+    holder.id = "google_translate_element";
+    holder.hidden = true;
+    document.body.appendChild(holder);
+  }
+
+  window.googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "de",
+        includedLanguages: LANGS.map((l) => l.code).join(","),
+        autoDisplay: false,
+      },
+      "google_translate_element",
+    );
+    apply();
+  };
+
+  if (!document.getElementById("pps-gtranslate")) {
+    const s = document.createElement("script");
+    s.id = "pps-gtranslate";
+    s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    s.async = true;
+    document.head.appendChild(s);
+  }
+}
 
 /**
  * Header im Stil der ProPhotoSkills KI-Coach-App,
  * mit ProPhotoSkills-Logo statt KI-Coach-Logo/Text.
  */
 export function Header() {
+  const [lang, setLang] = useState<string>("de");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("pps_lang");
+    if (stored && LANGS.some((l) => l.code === stored)) setLang(stored);
+  }, []);
+
+  const selectLanguage = (code: string) => {
+    setLang(code);
+    localStorage.setItem("pps_lang", code);
+    if (code === "de") {
+      document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      window.location.reload();
+      return;
+    }
+    document.cookie = `googtrans=/de/${code}; path=/`;
+    loadTranslate(code);
+  };
+
   return (
     <header className="border-b border-black/10" style={{ backgroundColor: "#f8e800" }}>
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 sm:px-6">
         <a
-          href="https://prophotoskills.github.io/content/"
+          href="https://prophotoskills.github.io/pps/"
           target="_blank"
           rel="noreferrer"
           className="flex min-w-0 items-center gap-2.5"
@@ -21,6 +106,23 @@ export function Header() {
           />
         </a>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <div className="mr-1 flex items-center gap-0.5 sm:gap-1">
+            {LANGS.map((l) => (
+              <button
+                key={l.code}
+                type="button"
+                onClick={() => selectLanguage(l.code)}
+                title={l.label}
+                aria-label={l.label}
+                className={`rounded px-0.5 text-base leading-none transition-opacity hover:opacity-100 ${
+                  lang === l.code ? "opacity-100 ring-1 ring-black/40" : "opacity-60"
+                }`}
+              >
+                {l.flag}
+              </button>
+            ))}
+          </div>
+
           <a
             href="https://memberabo.prophotoskills.com/"
             target="_blank"
