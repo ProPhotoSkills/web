@@ -132,10 +132,7 @@ function MembersPage() {
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button size="lg" asChild>
-                <Link to="/checkout">Zugang kaufen — €299</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/">Mehr erfahren</Link>
+                <Link to="/checkout">Zugang freischalten</Link>
               </Button>
             </div>
           </CardContent>
