@@ -2,15 +2,16 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const LANGS = [
-  { code: "de", flag: "🇩🇪", label: "Deutsch" },
-  { code: "en", flag: "🇬🇧", label: "English" },
-  { code: "fr", flag: "🇫🇷", label: "Français" },
-  { code: "es", flag: "🇪🇸", label: "Español" },
-  { code: "pt", flag: "🇵🇹", label: "Português" },
-  { code: "it", flag: "🇮🇹", label: "Italiano" },
-  { code: "el", flag: "🇬🇷", label: "Ελληνικά" },
-  { code: "ja", flag: "🇯🇵", label: "日本語" },
+  { code: "en", label: "EN" },
+  { code: "de", label: "DE" },
+  { code: "fr", label: "FR" },
+  { code: "es", label: "ES" },
+  { code: "pt", label: "PT" },
+  { code: "it", label: "IT" },
+  { code: "el", label: "EL" },
+  { code: "ja", label: "JA" },
 ] as const;
+
 
 declare global {
   interface Window {
