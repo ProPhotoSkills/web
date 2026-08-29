@@ -110,13 +110,11 @@ function GatePage() {
 
           <p className="text-center text-sm text-muted-foreground">
             Noch keinen Account?{" "}
-            <a
-              href="https://memberabo.prophotoskills.com/"
-              className="font-medium text-primary hover:underline"
-            >
+            <Link to="/signup" className="font-medium text-primary hover:underline">
               Jetzt registrieren
-            </a>
+            </Link>
           </p>
+
         </CardContent>
       </Card>
     </div>

@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/signup")({
@@ -47,19 +45,16 @@ function SignupPage() {
     setIsConfirmed(true);
   }
 
-  async function handleGoogleSignup() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-
-    if (result.error) {
-      toast.error(result.error.message || "Google-Registrierung fehlgeschlagen");
-    }
-  }
-
   return (
-    <div className="container-pps flex flex-1 items-center justify-center py-12">
-      <Card className="w-full max-w-md">
+    <div
+      className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom, color-mix(in oklab, var(--background) 45%, transparent), color-mix(in oklab, var(--background) 65%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
+      }}
+    >
+      <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
+
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Konto erstellen</CardTitle>
           <CardDescription>
@@ -101,20 +96,7 @@ function SignupPage() {
             </div>
           ) : (
             <>
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={handleGoogleSignup}
-                type="button"
-              >
-                Mit Google fortfahren
-              </Button>
 
-              <div className="flex items-center gap-3">
-                <Separator className="flex-1" />
-                <span className="text-xs text-muted-foreground">oder</span>
-                <Separator className="flex-1" />
-              </div>
 
               <form onSubmit={handleEmailSignup} className="space-y-4">
                 <div className="space-y-2">
