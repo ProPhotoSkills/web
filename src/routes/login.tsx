@@ -69,21 +69,6 @@ function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleLogin}
-            type="button"
-          >
-            Mit Google fortfahren
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">oder</span>
-            <Separator className="flex-1" />
-          </div>
-
           <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">E-Mail</Label>
