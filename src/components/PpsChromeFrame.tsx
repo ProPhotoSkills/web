@@ -73,9 +73,10 @@ export function PpsChromeFrame({
     <iframe
       ref={ref}
       title={title}
-      srcDoc={doc}
+      srcDoc={origin ? doc : undefined}
       scrolling="no"
       style={{ width: "100%", height, border: 0, display: "block" }}
     />
   );
+
 }
