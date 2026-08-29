@@ -25,17 +25,25 @@ export function PpsChromeFrame({
 }) {
   const ref = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(title === "Footer" ? 300 : 110);
+  const [origin, setOrigin] = useState<string | null>(null);
 
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  // Absolute URLs are required: <base> points at the content site, so a
+  // root-relative path would resolve against that host instead of the app.
   const doc = `<!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8">
 <base href="https://prophotoskills.github.io/content/" target="_parent">
 <link rel="stylesheet" href="${PPS_FONTS}">
-<link rel="stylesheet" href="${PPS_CSS}">
+<link rel="stylesheet" href="${origin}${PPS_CSS_PATH}">
 <style>html,body{margin:0;padding:0;overflow-x:hidden}${extraCss}</style>
 </head><body class="et-tb et-tb-has-header et-tb-has-footer">
 <div id="page-container"><div id="et-boc" class="et-boc">${html}</div></div>
-<script src="https://prophotoskills.github.io/content/js/pps-site.js" defer></script>
+<script src="${origin}${PPS_JS_PATH}" defer></script>
 </body></html>`;
+
 
   useEffect(() => {
     const frame = ref.current;
