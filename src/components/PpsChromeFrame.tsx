@@ -50,13 +50,30 @@ export function PpsChromeFrame({
     if (!frame) return;
 
     const measure = () => {
-      const body = frame.contentDocument?.body;
-      if (!body) return;
+      const doc = frame.contentDocument;
+      const body = doc?.body;
+      if (!doc || !body) return;
+      // An open mobile menu is position:fixed, so it does not affect
+      // scrollHeight — grow the frame so the dropdown stays visible.
+      let openMenuBottom = 0;
+      doc.querySelectorAll<HTMLElement>(".et_mobile_menu").forEach((menu) => {
+        if (menu.style.display === "block") {
+          openMenuBottom = Math.max(
+            openMenuBottom,
+            menu.getBoundingClientRect().bottom + 8,
+          );
+        }
+      });
       const next = Math.ceil(
-        Math.max(body.scrollHeight, body.getBoundingClientRect().height),
+        Math.max(
+          body.scrollHeight,
+          body.getBoundingClientRect().height,
+          openMenuBottom,
+        ),
       );
       if (next > 0) setHeight(next);
     };
+
 
     frame.addEventListener("load", measure);
     const interval = window.setInterval(measure, 500);
