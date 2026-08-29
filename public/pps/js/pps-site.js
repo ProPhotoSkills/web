@@ -32,7 +32,9 @@ function googleTranslateElementInit(){new google.translate.TranslateElement({pag
    oeffnet/schliesst es per Klick auf den Hamburger-Button. */
 (function () {
   function initMobileMenu() {
-    document.querySelectorAll('.et_pb_menu__wrap, .et_pb_menu').forEach(function (menuWrap) {
+    document.querySelectorAll('.et_pb_menu').forEach(function (menuWrap) {
+      if (menuWrap.dataset.ppsMobileMenuInit === '1') return;
+      menuWrap.dataset.ppsMobileMenuInit = '1';
       var desktopList = menuWrap.querySelector('.et-menu, .et_pb_menu__menu nav ul');
       var mobileNavWrap = menuWrap.querySelector('.et_mobile_nav_menu');
       if (!desktopList || !mobileNavWrap) return;
