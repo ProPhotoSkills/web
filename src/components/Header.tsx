@@ -19,12 +19,6 @@ export function Header() {
             alt="ProPhotoSkills Logo"
             className="h-8 w-auto shrink-0"
           />
-          <span className="hidden truncate text-sm font-semibold tracking-tight text-stone-900/90 sm:inline sm:text-base">
-            ProPhotoSkills
-          </span>
-          <span className="truncate text-sm font-semibold tracking-tight text-stone-900/90 sm:hidden">
-            PPS
-          </span>
         </a>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <a
