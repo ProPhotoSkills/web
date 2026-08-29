@@ -47,19 +47,16 @@ function SignupPage() {
     setIsConfirmed(true);
   }
 
-  async function handleGoogleSignup() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-
-    if (result.error) {
-      toast.error(result.error.message || "Google-Registrierung fehlgeschlagen");
-    }
-  }
-
   return (
-    <div className="container-pps flex flex-1 items-center justify-center py-12">
-      <Card className="w-full max-w-md">
+    <div
+      className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom, color-mix(in oklab, var(--background) 45%, transparent), color-mix(in oklab, var(--background) 65%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
+      }}
+    >
+      <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
+
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Konto erstellen</CardTitle>
           <CardDescription>
