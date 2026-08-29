@@ -18,8 +18,10 @@ export const Route = createFileRoute("/_authenticated/members")({
       { property: "og:title", content: "Mitgliederbereich — ProPhotoSkills" },
       { property: "og:description", content: "Dein ProPhotoSkills-Mitgliederbereich." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://pps-web-login.lovable.app/members" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://pps-web-login.lovable.app/members" }],
   }),
   component: MembersPage,
 });

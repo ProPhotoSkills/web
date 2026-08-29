@@ -15,8 +15,10 @@ export const Route = createFileRoute("/signup")({
       { property: "og:title", content: "Registrieren — ProPhotoSkills" },
       { property: "og:description", content: "Erstelle deinen ProPhotoSkills-Account und sichere dir den Zugriff auf alle Kurse." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://pps-web-login.lovable.app/signup" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://pps-web-login.lovable.app/signup" }],
   }),
   component: SignupPage,
 });
