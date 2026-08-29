@@ -24,7 +24,7 @@ export function PpsChromeFrame({
   extraCss?: string;
 }) {
   const ref = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(title === "Footer" ? 300 : 110);
+  const [height, setHeight] = useState(title === "Footer" ? 300 : 96);
   const [origin, setOrigin] = useState<string | null>(null);
 
   useEffect(() => {
