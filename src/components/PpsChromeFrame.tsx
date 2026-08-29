@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-const PPS_CSS = "https://prophotoskills.github.io/content/css/pps-site.css";
+// Locally hosted (fixed) PPS stylesheet + script: includes the ETmodules icon
+// font for the hamburger button and the jQuery-free mobile menu toggle.
+const PPS_CSS_PATH = "/pps/css/pps-site.css";
+const PPS_JS_PATH = "/pps/js/pps-site.js";
 const PPS_FONTS =
   "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap";
+
 
 /**
  * Renders the original ProPhotoSkills header/footer markup 1:1 inside an
