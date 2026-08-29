@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -54,16 +52,6 @@ function LoginPage() {
     router.navigate({ to: "/members" });
   }
 
-  async function handleGoogleLogin() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-
-    if (result.error) {
-      toast.error(result.error.message || "Google-Anmeldung fehlgeschlagen");
-    }
-  }
-
   return (
     <div
       className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
@@ -81,21 +69,6 @@ function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleLogin}
-            type="button"
-          >
-            Mit Google fortfahren
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">oder</span>
-            <Separator className="flex-1" />
-          </div>
-
           <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">E-Mail</Label>
