@@ -118,6 +118,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [
+      {
+        children:
+          "if(location.protocol==='http:'&&!['localhost','127.0.0.1'].includes(location.hostname)){location.replace('https://'+location.host+location.pathname+location.search+location.hash)}",
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
