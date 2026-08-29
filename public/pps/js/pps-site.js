@@ -69,6 +69,12 @@ function googleTranslateElementInit(){new google.translate.TranslateElement({pag
           mobileNav.classList.remove('closed');
           mobileNav.classList.add('opened');
           mobileMenu.style.display = 'block';
+          // Unter dem Hamburger-Button ausrichten (rechtsbuendig, im Viewport)
+          var r = bar.getBoundingClientRect();
+          var w = mobileMenu.getBoundingClientRect().width;
+          var left = Math.max(8, Math.min(r.right - w, document.documentElement.clientWidth - w - 8));
+          mobileMenu.style.top = Math.round(r.bottom + 6) + 'px';
+          mobileMenu.style.left = Math.round(left) + 'px';
         } else {
           mobileNav.classList.remove('opened');
           mobileNav.classList.add('closed');
