@@ -59,7 +59,7 @@ function LoginPage() {
       className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
       style={{
         backgroundImage:
-          "linear-gradient(to bottom, color-mix(in oklab, black 20%, transparent), color-mix(in oklab, black 40%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
+          "linear-gradient(to bottom, color-mix(in oklab, black 10%, transparent), color-mix(in oklab, black 20%, transparent)), url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
       }}
     >
       <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
