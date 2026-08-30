@@ -124,31 +124,11 @@ export function Header() {
                   width={20}
                   height={14}
                   style={{ borderRadius: 2, margin: "0 2px" }}
-                  className={lang === l.code ? "opacity-100" : "opacity-100"}
+                  className={lang === l.code ? "opacity-100" : "opacity-60"}
                 />
               </a>
             ))}
           </div>
-
-
-          <a
-            href="https://memberabo.prophotoskills.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="relative inline-flex h-8 items-center justify-center gap-2 overflow-hidden rounded-full border border-black/30 bg-cover bg-center px-2.5 text-xs font-semibold text-white shadow-sm transition-colors hover:text-white sm:px-4"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(10,20,40,0.55), rgba(10,20,40,0.7)), url(/assets/heli-bg.webp)",
-            }}
-          >
-            <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">Angebote</span>
-          </a>
-          <Link
-            to="/login"
-            className="inline-flex h-8 items-center justify-center gap-2 whitespace-nowrap rounded-md px-2 text-xs font-medium text-stone-900/90 transition-colors hover:bg-black/10 sm:px-3"
-          >
-            Anmelden
-          </Link>
         </div>
       </div>
     </header>
