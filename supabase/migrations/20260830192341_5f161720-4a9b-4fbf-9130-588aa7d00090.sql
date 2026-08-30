@@ -1,0 +1,1 @@
+revoke all on function public.grant_admin_on_signup() from anon, authenticated, public;
