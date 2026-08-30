@@ -15,6 +15,7 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
+import { Route as AuthenticatedPpsAdminRouteImport } from './routes/_authenticated/pps-admin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,6 +46,11 @@ const AuthenticatedMembersRoute = AuthenticatedMembersRouteImport.update({
   path: '/members',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPpsAdminRoute = AuthenticatedPpsAdminRouteImport.update({
+  id: '/pps-admin',
+  path: '/pps-admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/members': typeof AuthenticatedMembersRoute
+  '/pps-admin': typeof AuthenticatedPpsAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/members': typeof AuthenticatedMembersRoute
+  '/pps-admin': typeof AuthenticatedPpsAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +76,14 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/_authenticated/members': typeof AuthenticatedMembersRoute
+  '/_authenticated/pps-admin': typeof AuthenticatedPpsAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/checkout' | '/login' | '/signup' | '/members'
+  fullPaths:
+    '/' | '/checkout' | '/login' | '/signup' | '/members' | '/pps-admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout' | '/login' | '/signup' | '/members'
+  to: '/' | '/checkout' | '/login' | '/signup' | '/members' | '/pps-admin'
   id:
     | '__root__'
     | '/'
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/_authenticated/members'
+    | '/_authenticated/pps-admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -136,15 +147,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMembersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pps-admin': {
+      id: '/_authenticated/pps-admin'
+      path: '/pps-admin'
+      fullPath: '/pps-admin'
+      preLoaderRoute: typeof AuthenticatedPpsAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedMembersRoute: typeof AuthenticatedMembersRoute
+  AuthenticatedPpsAdminRoute: typeof AuthenticatedPpsAdminRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMembersRoute: AuthenticatedMembersRoute,
+  AuthenticatedPpsAdminRoute: AuthenticatedPpsAdminRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
