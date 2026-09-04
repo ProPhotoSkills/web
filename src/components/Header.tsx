@@ -161,7 +161,7 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-4 md:mt-6 lg:hidden">
+        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-5 md:mt-8 lg:hidden">
           <Button
             type="button"
             variant="ghost"
@@ -186,7 +186,7 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end pb-2 mt-4 md:mt-6 lg:hidden" aria-label="Sprache wählen">
+        <div className="flex items-center justify-end pb-2 mt-5 md:mt-8 lg:hidden" aria-label="Sprache wählen">
           {LANGS.map((l) => (
             <a
               key={l.code}
