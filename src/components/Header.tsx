@@ -152,7 +152,7 @@ export function Header() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="block whitespace-nowrap px-[3px] py-2 text-[15px] font-medium transition-opacity hover:opacity-60"
+                    className="block whitespace-nowrap px-[3px] py-2 text-[15px] font-normal transition-opacity hover:opacity-60"
                   >
                     {item.label}
                   </a>
