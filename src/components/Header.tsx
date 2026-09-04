@@ -158,6 +158,12 @@ export function Header() {
               </a>
             ))}
           </div>
+          <a
+            href="/login"
+            className="hidden whitespace-nowrap rounded-md bg-[#454545] px-4 py-2 text-sm font-semibold text-[#f8e800] transition-opacity hover:opacity-80 lg:block"
+          >
+            Anmelden
+          </a>
           <Button
             type="button"
             variant="ghost"
@@ -191,6 +197,15 @@ export function Header() {
                 </a>
               </li>
             ))}
+            <li className="border-b border-[#454545]/15 last:border-b-0">
+              <a
+                href="/login"
+                className="block py-3 text-[15px] font-bold"
+                onClick={() => setMenuOpen(false)}
+              >
+                Anmelden
+              </a>
+            </li>
           </ul>
         </nav>
       ) : null}
