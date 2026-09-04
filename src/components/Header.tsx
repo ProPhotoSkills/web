@@ -136,8 +136,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex shrink-0 items-center justify-center gap-2 lg:justify-end">
-          <div className="hidden items-center lg:flex" aria-label="Sprache wählen">
+        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 lg:justify-end lg:pb-2">
+          <div className="hidden items-center lg:flex lg:items-end" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
@@ -168,11 +168,11 @@ export function Header() {
             aria-controls="pps-mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            {menuOpen ? <X className="size-8" strokeWidth={2.5} /> : <Menu className="size-8" strokeWidth={2.5} />}
+            {menuOpen ? <X className="size-9" strokeWidth={3} /> : <Menu className="size-9" strokeWidth={3} />}
           </Button>
         </div>
 
-        <div className="flex items-center justify-end lg:hidden" aria-label="Sprache wählen">
+        <div className="flex items-center justify-end pb-2 lg:hidden" aria-label="Sprache wählen">
           {LANGS.map((l) => (
             <a
               key={l.code}
