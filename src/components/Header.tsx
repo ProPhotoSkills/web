@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const LANGS = [
   { code: "en", label: "EN" },
@@ -10,6 +11,18 @@ const LANGS = [
   { code: "it", label: "IT" },
   { code: "el", label: "EL" },
   { code: "ja", label: "JA" },
+] as const;
+
+const MENU_ITEMS = [
+  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/content/knowledge.html" },
+  { label: "TECHNIK", href: "https://prophotoskills.github.io/content/technik.html" },
+  { label: "PROGRESS", href: "https://prophotoskills.github.io/content/progress.html" },
+  { label: "SKILL", href: "https://prophotoskills.github.io/content/skill.html" },
+  { label: "PSYCHO", href: "https://prophotoskills.github.io/content/psycho.html" },
+  { label: "TRAVEL", href: "https://prophotoskills.github.io/content/travel.html" },
+  { label: "LOCATION", href: "https://prophotoskills.github.io/content/location.html" },
+  { label: "INSURANCE", href: "https://prophotoskills.github.io/content/insurance.html" },
+  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/content/equipment.html" },
 ] as const;
 
 
@@ -73,6 +86,7 @@ function loadTranslate(lang: string) {
  */
 export function Header() {
   const [lang, setLang] = useState<string>("de");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("pps_lang");
@@ -92,22 +106,38 @@ export function Header() {
   };
 
   return (
-    <header className="border-b border-black/10" style={{ backgroundColor: "#f8e800" }}>
-      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 sm:px-6">
+    <header className="relative z-50 border-b border-foreground/10 bg-[#f8e800] text-[#454545]">
+      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 px-4 py-3 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
         <a
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
           rel="noreferrer"
-          className="flex min-w-0 items-center gap-2.5"
+          className="flex min-w-0 items-center"
         >
           <img
             src="https://prophotoskills.github.io/pps-assets/images/ProPhotoSkills_Logo.png"
             alt="ProPhotoSkills Logo"
-            className="h-8 w-auto shrink-0"
+            className="h-auto w-full max-w-[18rem]"
           />
         </a>
-        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <div className="mr-1 flex items-center">
+
+        <nav aria-label="Hauptmenü" className="hidden lg:block">
+          <ul className="flex flex-nowrap items-center gap-[5px]">
+            {MENU_ITEMS.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className="block whitespace-nowrap px-[3px] py-2 text-[15px] font-medium transition-opacity hover:opacity-60"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex shrink-0 items-center justify-end gap-2">
+          <div className="flex items-center" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
@@ -123,14 +153,47 @@ export function Header() {
                   alt={l.label}
                   width={20}
                   height={14}
-                  style={{ borderRadius: 2, margin: "0 2px" }}
-                  className={lang === l.code ? "opacity-100" : "opacity-60"}
+                  className={`mx-0.5 rounded-sm border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
                 />
               </a>
             ))}
           </div>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden"
+            aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={menuOpen}
+            aria-controls="pps-mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
+          </Button>
         </div>
       </div>
+
+      {menuOpen ? (
+        <nav
+          id="pps-mobile-menu"
+          aria-label="Mobiles Hauptmenü"
+          className="absolute inset-x-0 top-full border-t border-[#454545]/20 bg-[#f8e800] shadow-lg lg:hidden"
+        >
+          <ul className="mx-auto grid max-w-[1440px] px-4 py-2 sm:px-6">
+            {MENU_ITEMS.map((item) => (
+              <li key={item.label} className="border-b border-[#454545]/15 last:border-b-0">
+                <a
+                  href={item.href}
+                  className="block py-3 text-[15px] font-medium"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
     </header>
   );
 }
