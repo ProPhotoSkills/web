@@ -107,12 +107,12 @@ export function Header() {
 
   return (
     <header className="relative z-50 border-b border-foreground/10 bg-[#f8e800] text-[#454545]">
-      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 px-4 py-3 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
+      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-end gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
         <a
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
           rel="noreferrer"
-          className="flex min-w-0 items-center"
+          className="flex min-w-0 items-center self-center"
         >
           <img
             src="https://prophotoskills.github.io/pps-assets/images/ProPhotoSkills_Logo.png"
@@ -121,8 +121,8 @@ export function Header() {
           />
         </a>
 
-        <nav aria-label="Hauptmenü" className="hidden lg:block">
-          <ul className="flex flex-nowrap items-center gap-[5px]">
+        <nav aria-label="Hauptmenü" className="hidden lg:block self-end pb-1">
+          <ul className="flex flex-nowrap items-end gap-[5px]">
             {MENU_ITEMS.map((item) => (
               <li key={item.label}>
                 <a
@@ -136,8 +136,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex shrink-0 items-center justify-end gap-2">
-          <div className="flex items-center" aria-label="Sprache wählen">
+        <div className="flex shrink-0 items-end justify-end gap-2 pb-1 lg:pb-1">
+          <div className="flex items-center self-end" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
@@ -162,7 +162,7 @@ export function Header() {
             type="button"
             variant="ghost"
             size="icon"
-            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden"
+            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden self-end"
             aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={menuOpen}
             aria-controls="pps-mobile-menu"
