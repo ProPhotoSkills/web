@@ -125,7 +125,7 @@ export function Header() {
         </a>
 
         <div className="hidden flex-col items-end justify-start gap-1 lg:flex">
-          <div className="flex items-center lg:mt-4" aria-label="Sprache wählen">
+          <div className="flex items-center gap-1 lg:mt-4" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
@@ -141,7 +141,6 @@ export function Header() {
                   alt={l.label}
                   width={20}
                   height={14}
-                  className="mx-0.5"
                 />
               </a>
             ))}
