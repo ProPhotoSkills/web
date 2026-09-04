@@ -121,7 +121,7 @@ export function Header() {
           />
         </a>
 
-        <nav aria-label="Hauptmenü" className="hidden lg:block self-end pb-1">
+        <nav aria-label="Hauptmenü" className="hidden lg:block self-end">
           <ul className="flex flex-nowrap items-end gap-[5px]">
             {MENU_ITEMS.map((item) => (
               <li key={item.label}>
@@ -137,7 +137,7 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-6 md:mt-8 lg:justify-end lg:pb-2">
-          <div className="hidden items-center lg:flex lg:items-end lg:-mt-2" aria-label="Sprache wählen">
+          <div className="hidden items-center lg:flex lg:items-end lg:-mt-0.5" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
