@@ -153,7 +153,7 @@ export function Header() {
                   alt={l.label}
                   width={20}
                   height={14}
-                  className={`mx-0.5 rounded-sm border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100`}`}
+                  className={`mx-0.5 rounded-sm border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
                 />
               </a>
             ))}
@@ -172,7 +172,7 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end self-end pb-1 lg:hidden" aria-label="Sprache wählen">
+        <div className="flex items-center justify-end lg:hidden" aria-label="Sprache wählen">
           {LANGS.map((l) => (
             <a
               key={l.code}
