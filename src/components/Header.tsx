@@ -172,7 +172,7 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end pb-2 lg:hidden" aria-label="Sprache wählen">
+        <div className="flex items-center justify-end pb-2 md:mt-6 lg:hidden" aria-label="Sprache wählen">
           {LANGS.map((l) => (
             <a
               key={l.code}
