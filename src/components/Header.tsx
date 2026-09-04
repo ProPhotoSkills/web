@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLocation } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 const LANGS = [
@@ -85,8 +86,10 @@ function loadTranslate(lang: string) {
  * mit ProPhotoSkills-Logo statt KI-Coach-Logo/Text.
  */
 export function Header() {
+  const location = useLocation();
   const [lang, setLang] = useState<string>("de");
   const [menuOpen, setMenuOpen] = useState(false);
+  const hideArrow = location.pathname === "/" || location.pathname === "/login";
 
   useEffect(() => {
     const stored = localStorage.getItem("pps_lang");
@@ -122,19 +125,21 @@ export function Header() {
         </a>
 
         <div className="hidden items-end gap-4 lg:flex">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mb-2 h-6 w-6 shrink-0"
-            aria-hidden="true"
-          >
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-            <path d="M3 3v5h5" />
-          </svg>
+          {!hideArrow && (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mb-2 h-6 w-6 shrink-0"
+              aria-hidden="true"
+            >
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+          )}
           <nav aria-label="Hauptmenü" className="self-end">
             <ul className="flex flex-nowrap items-end gap-[18px]">
               {MENU_ITEMS.map((item) => (
