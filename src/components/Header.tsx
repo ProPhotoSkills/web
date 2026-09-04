@@ -168,7 +168,7 @@ export function Header() {
                   alt={l.label}
                   width={20}
                   height={14}
-                  className={`mx-0.5 border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
+                  className="mx-0.5"
                 />
               </a>
             ))}
@@ -213,7 +213,7 @@ export function Header() {
                 alt={l.label}
                 width={20}
                 height={14}
-                className={`mx-0.5 border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
+                className="mx-0.5"
               />
             </a>
           ))}
