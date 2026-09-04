@@ -197,6 +197,15 @@ export function Header() {
                 </a>
               </li>
             ))}
+            <li className="border-b border-[#454545]/15 last:border-b-0">
+              <a
+                href="/login"
+                className="block py-3 text-[15px] font-bold"
+                onClick={() => setMenuOpen(false)}
+              >
+                Anmelden
+              </a>
+            </li>
           </ul>
         </nav>
       ) : null}
