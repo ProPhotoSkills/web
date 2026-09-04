@@ -171,12 +171,12 @@ export function Header() {
             {menuOpen ? (
               <>
                 <X className="size-9 md:hidden" strokeWidth={3} />
-                <X className="hidden md:block lg:hidden size-10" strokeWidth={4} />
+                <X className="hidden md:block lg:hidden size-10" strokeWidth={3} />
               </>
             ) : (
               <>
                 <Menu className="size-9 md:hidden" strokeWidth={3} />
-                <Menu className="hidden md:block lg:hidden size-10" strokeWidth={4} />
+                <Menu className="hidden md:block lg:hidden size-10" strokeWidth={3} />
               </>
             )}
           </Button>
