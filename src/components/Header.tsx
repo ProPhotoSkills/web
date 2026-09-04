@@ -115,7 +115,7 @@ export function Header() {
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
           rel="noreferrer"
-          className="flex min-w-0 items-end self-end"
+          className="flex min-w-0 items-end self-end lg:-translate-y-[2mm]"
         >
           <img
             src="https://prophotoskills.github.io/pps-assets/images/ProPhotoSkills_Logo.png"
