@@ -11,7 +11,7 @@ const PPS_FONTS =
 /**
  * Renders the original ProPhotoSkills header/footer markup 1:1 inside an
  * isolated document, loading the original site stylesheet. This keeps the
- * chrome pixel-identical to prophotoskills.github.io/content and prevents any
+ * chrome pixel-identical to prophotoskills.github.io/pps and prevents any
  * CSS bleed in either direction.
  */
 export function PpsChromeFrame({
@@ -31,11 +31,11 @@ export function PpsChromeFrame({
     setOrigin(window.location.origin);
   }, []);
 
-  // Absolute URLs are required: <base> points at the content site, so a
+  // Absolute URLs are required: <base> points at the public PPS site, so a
   // root-relative path would resolve against that host instead of the app.
   const doc = `<!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8">
-<base href="https://prophotoskills.github.io/content/" target="_parent">
+<base href="https://prophotoskills.github.io/pps/" target="_parent">
 <link rel="stylesheet" href="${PPS_FONTS}">
 <link rel="stylesheet" href="${origin}${PPS_CSS_PATH}">
 <style>html,body{margin:0;padding:0;overflow-x:hidden;background:${title === "Footer" ? "#4a4a4a" : "#f8e800"}}${extraCss}</style>
