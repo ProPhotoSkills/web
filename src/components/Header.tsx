@@ -137,7 +137,7 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center justify-center gap-2 pb-2 lg:justify-end lg:pb-2">
-          <div className="hidden items-center lg:flex lg:items-end" aria-label="Sprache wählen">
+          <div className="hidden items-center lg:flex lg:items-end lg:mt-5" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
