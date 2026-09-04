@@ -124,23 +124,29 @@ export function Header() {
           />
         </a>
 
-        <div className="hidden items-end gap-4 lg:flex">
-          {!hideArrow && (
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mb-2 h-6 w-6 shrink-0"
-              aria-hidden="true"
-            >
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-              <path d="M3 3v5h5" />
-            </svg>
-          )}
-          <nav aria-label="Hauptmenü" className="self-end">
+        <div className="hidden flex-col items-end justify-end gap-1 lg:flex">
+          <div className="flex items-center" aria-label="Sprache wählen">
+            {LANGS.map((l) => (
+              <a
+                key={l.code}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  selectLanguage(l.code);
+                }}
+                title={l.label}
+              >
+                <img
+                  src={`https://prophotoskills.github.io/pps-assets/images/${l.code}.svg`}
+                  alt={l.label}
+                  width={20}
+                  height={14}
+                  className="mx-0.5"
+                />
+              </a>
+            ))}
+          </div>
+          <nav aria-label="Hauptmenü">
             <ul className="flex flex-nowrap items-end gap-[18px]">
               {MENU_ITEMS.map((item) => (
                 <li key={item.label}>
