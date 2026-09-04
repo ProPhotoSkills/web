@@ -106,7 +106,7 @@ export function Header() {
   };
 
   return (
-    <header className="relative z-50 border-b border-foreground/10 bg-[#f8e800] text-[#454545]">
+    <header className="relative z-50 bg-[#f8e800] text-[#454545]">
       <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
         <a
           href="https://prophotoskills.github.io/pps/"
@@ -121,20 +121,35 @@ export function Header() {
           />
         </a>
 
-        <nav aria-label="Hauptmenü" className="hidden lg:block self-end">
-          <ul className="flex flex-nowrap items-end gap-[5px]">
-            {MENU_ITEMS.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="block whitespace-nowrap px-[3px] py-2 text-[15px] font-medium transition-opacity hover:opacity-60"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="hidden items-end gap-4 lg:flex">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mb-2 h-6 w-6 shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+          <nav aria-label="Hauptmenü" className="self-end">
+            <ul className="flex flex-nowrap items-end gap-[18px]">
+              {MENU_ITEMS.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="block whitespace-nowrap px-[3px] py-2 text-[15px] font-medium transition-opacity hover:opacity-60"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
         <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-6 md:mt-8 lg:justify-end lg:pb-2">
           <div className="hidden items-center lg:flex lg:items-end lg:-mt-0.5" aria-label="Sprache wählen">
