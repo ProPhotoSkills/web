@@ -110,7 +110,7 @@ export function Header() {
 
   return (
     <header className="relative z-50 bg-[#f8e800] text-[#454545]">
-      <div className="mx-auto grid min-h-[78px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto] lg:gap-x-6 lg:px-32 lg:translate-y-[5mm]">
+      <div className="mx-auto grid min-h-[78px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto] lg:gap-x-6 lg:px-32 lg:-translate-y-[1mm]">
         <a
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
@@ -162,7 +162,7 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-6 md:mt-8 lg:hidden">
+        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-1 md:mt-3 lg:hidden">
           <Button
             type="button"
             variant="ghost"
@@ -187,7 +187,7 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end pb-2 mt-6 md:mt-8 lg:hidden" aria-label="Sprache wählen">
+        <div className="flex items-center justify-end pb-2 mt-1 md:mt-3 lg:hidden" aria-label="Sprache wählen">
           {LANGS.map((l) => (
             <a
               key={l.code}
