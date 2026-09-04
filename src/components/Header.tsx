@@ -14,15 +14,15 @@ const LANGS = [
 ] as const;
 
 const MENU_ITEMS = [
-  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/content/knowledge.html" },
-  { label: "TECHNIK", href: "https://prophotoskills.github.io/content/technik.html" },
-  { label: "PROGRESS", href: "https://prophotoskills.github.io/content/progress.html" },
-  { label: "SKILL", href: "https://prophotoskills.github.io/content/skill.html" },
-  { label: "PSYCHO", href: "https://prophotoskills.github.io/content/psycho.html" },
-  { label: "TRAVEL", href: "https://prophotoskills.github.io/content/travel.html" },
-  { label: "LOCATION", href: "https://prophotoskills.github.io/content/location.html" },
-  { label: "INSURANCE", href: "https://prophotoskills.github.io/content/insurance.html" },
-  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/content/equipment.html" },
+  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/pps/knowledge/" },
+  { label: "TECHNIK", href: "https://prophotoskills.github.io/pps/technik/" },
+  { label: "PROGRESS", href: "https://prophotoskills.github.io/pps/progress/" },
+  { label: "SKILL", href: "https://prophotoskills.github.io/pps/skill/" },
+  { label: "PSYCHO", href: "https://prophotoskills.github.io/pps/psycho/" },
+  { label: "TRAVEL", href: "https://prophotoskills.github.io/pps/travel/" },
+  { label: "LOCATION", href: "https://prophotoskills.github.io/pps/location/" },
+  { label: "INSURANCE", href: "https://prophotoskills.github.io/pps/insurance/" },
+  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/pps/equipment/" },
 ] as const;
 
 
