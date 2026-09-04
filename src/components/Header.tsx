@@ -107,7 +107,7 @@ export function Header() {
 
   return (
     <header className="relative z-50 border-b border-foreground/10 bg-[#f8e800] text-[#454545]">
-      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-end gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
+      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-end gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto_minmax(180px,1fr)] lg:gap-x-6 lg:px-8">
         <a
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
@@ -137,7 +137,7 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-end justify-end gap-2 pb-1 lg:pb-1">
-          <div className="flex items-center self-end" aria-label="Sprache wählen">
+          <div className="hidden items-center self-end lg:flex" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
                 key={l.code}
@@ -162,7 +162,7 @@ export function Header() {
             type="button"
             variant="ghost"
             size="icon"
-            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden self-end"
+            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden self-end mx-auto"
             aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={menuOpen}
             aria-controls="pps-mobile-menu"
@@ -170,6 +170,28 @@ export function Header() {
           >
             {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
           </Button>
+        </div>
+
+        <div className="flex items-center justify-end self-end pb-1 lg:hidden" aria-label="Sprache wählen">
+          {LANGS.map((l) => (
+            <a
+              key={l.code}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                selectLanguage(l.code);
+              }}
+              title={l.label}
+            >
+              <img
+                src={`https://prophotoskills.github.io/pps-assets/images/${l.code}.svg`}
+                alt={l.label}
+                width={20}
+                height={14}
+                className={`mx-0.5 rounded-sm border border-[#454545] transition-opacity ${lang === l.code ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
+              />
+            </a>
+          ))}
         </div>
       </div>
 
