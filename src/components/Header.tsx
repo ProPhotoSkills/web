@@ -110,7 +110,7 @@ export function Header() {
 
   return (
     <header className="relative z-50 bg-[#f8e800] text-[#454545]">
-      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto] lg:gap-x-6 lg:px-8">
+      <div className="mx-auto grid min-h-24 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-3 pt-5 sm:px-6 lg:grid-cols-[minmax(210px,1fr)_auto] lg:gap-x-6 lg:px-32 lg:-translate-y-[5mm]">
         <a
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
