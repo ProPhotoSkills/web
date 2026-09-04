@@ -147,7 +147,7 @@ export function Header() {
             ))}
           </div>
           <nav aria-label="Hauptmenü">
-            <ul className="flex flex-nowrap items-end gap-[18px]">
+            <ul className="flex flex-nowrap items-end gap-[10px]">
               {MENU_ITEMS.map((item) => (
                 <li key={item.label}>
                   <a
