@@ -86,8 +86,10 @@ function loadTranslate(lang: string) {
  * mit ProPhotoSkills-Logo statt KI-Coach-Logo/Text.
  */
 export function Header() {
+  const location = useLocation();
   const [lang, setLang] = useState<string>("de");
   const [menuOpen, setMenuOpen] = useState(false);
+  const hideArrow = location.pathname === "/" || location.pathname === "/login";
 
   useEffect(() => {
     const stored = localStorage.getItem("pps_lang");
