@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const PPS_CSS_PATH = "/pps/css/pps-site.css";
 const PPS_JS_PATH = "/pps/js/pps-site.js";
 const PPS_FONTS =
-  "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap";
 
 
 /**
