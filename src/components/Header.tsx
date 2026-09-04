@@ -14,15 +14,15 @@ const LANGS = [
 ] as const;
 
 const MENU_ITEMS = [
-  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/content/knowledge.html" },
-  { label: "TECHNIK", href: "https://prophotoskills.github.io/content/technik.html" },
-  { label: "PROGRESS", href: "https://prophotoskills.github.io/content/progress.html" },
-  { label: "SKILL", href: "https://prophotoskills.github.io/content/skill.html" },
-  { label: "PSYCHO", href: "https://prophotoskills.github.io/content/psycho.html" },
-  { label: "TRAVEL", href: "https://prophotoskills.github.io/content/travel.html" },
-  { label: "LOCATION", href: "https://prophotoskills.github.io/content/location.html" },
-  { label: "INSURANCE", href: "https://prophotoskills.github.io/content/insurance.html" },
-  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/content/equipment.html" },
+  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/pps/knowledge/" },
+  { label: "TECHNIK", href: "https://prophotoskills.github.io/pps/technik/" },
+  { label: "PROGRESS", href: "https://prophotoskills.github.io/pps/progress/" },
+  { label: "SKILL", href: "https://prophotoskills.github.io/pps/skill/" },
+  { label: "PSYCHO", href: "https://prophotoskills.github.io/pps/psycho/" },
+  { label: "TRAVEL", href: "https://prophotoskills.github.io/pps/travel/" },
+  { label: "LOCATION", href: "https://prophotoskills.github.io/pps/location/" },
+  { label: "INSURANCE", href: "https://prophotoskills.github.io/pps/insurance/" },
+  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/pps/equipment/" },
 ] as const;
 
 
@@ -158,12 +158,6 @@ export function Header() {
               </a>
             ))}
           </div>
-          <a
-            href="/login"
-            className="hidden whitespace-nowrap rounded-md bg-[#454545] px-4 py-2 text-sm font-semibold text-[#f8e800] transition-opacity hover:opacity-80 lg:block"
-          >
-            Anmelden
-          </a>
           <Button
             type="button"
             variant="ghost"
@@ -197,15 +191,6 @@ export function Header() {
                 </a>
               </li>
             ))}
-            <li className="border-b border-[#454545]/15 last:border-b-0">
-              <a
-                href="/login"
-                className="block py-3 text-[15px] font-bold"
-                onClick={() => setMenuOpen(false)}
-              >
-                Anmelden
-              </a>
-            </li>
           </ul>
         </nav>
       ) : null}
