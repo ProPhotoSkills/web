@@ -136,7 +136,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex shrink-0 items-end justify-end gap-2 pb-1 lg:pb-1">
+        <div className="flex shrink-0 items-end justify-center gap-2 pb-1 lg:justify-end lg:pb-1">
           <div className="hidden items-center self-end lg:flex" aria-label="Sprache wählen">
             {LANGS.map((l) => (
               <a
@@ -162,7 +162,7 @@ export function Header() {
             type="button"
             variant="ghost"
             size="icon"
-            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden self-end mx-auto"
+            className="text-[#454545] hover:bg-[#454545]/10 hover:text-[#454545] lg:hidden self-end"
             aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={menuOpen}
             aria-controls="pps-mobile-menu"
