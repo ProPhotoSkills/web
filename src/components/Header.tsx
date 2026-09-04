@@ -162,28 +162,7 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-6 md:mt-8 lg:justify-end lg:pb-2">
-          <div className="hidden items-center lg:flex lg:items-end lg:-mt-0.5" aria-label="Sprache wählen">
-            {LANGS.map((l) => (
-              <a
-                key={l.code}
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  selectLanguage(l.code);
-                }}
-                title={l.label}
-              >
-                <img
-                  src={`https://prophotoskills.github.io/pps-assets/images/${l.code}.svg`}
-                  alt={l.label}
-                  width={20}
-                  height={14}
-                  className="mx-0.5"
-                />
-              </a>
-            ))}
-          </div>
+        <div className="flex shrink-0 items-center justify-center gap-2 pb-2 mt-6 md:mt-8 lg:hidden">
           <Button
             type="button"
             variant="ghost"
