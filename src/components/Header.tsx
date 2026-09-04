@@ -158,12 +158,6 @@ export function Header() {
               </a>
             ))}
           </div>
-          <a
-            href="/login"
-            className="hidden whitespace-nowrap rounded-md bg-[#454545] px-4 py-2 text-sm font-semibold text-[#f8e800] transition-opacity hover:opacity-80 lg:block"
-          >
-            Anmelden
-          </a>
           <Button
             type="button"
             variant="ghost"
