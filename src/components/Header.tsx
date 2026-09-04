@@ -115,7 +115,7 @@ export function Header() {
           href="https://prophotoskills.github.io/pps/"
           target="_blank"
           rel="noreferrer"
-          className="flex min-w-0 items-center self-center"
+          className="flex min-w-0 items-center self-center lg:translate-y-[3mm]"
         >
           <img
             src="https://prophotoskills.github.io/pps-assets/images/ProPhotoSkills_Logo.png"
@@ -147,7 +147,7 @@ export function Header() {
             ))}
           </div>
           <nav aria-label="Hauptmenü">
-            <ul className="flex flex-nowrap items-end gap-[18px]">
+            <ul className="flex flex-nowrap items-end gap-[10px]">
               {MENU_ITEMS.map((item) => (
                 <li key={item.label}>
                   <a
