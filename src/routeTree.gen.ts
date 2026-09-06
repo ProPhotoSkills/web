@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
 import { Route as AuthenticatedPpsAdminRouteImport } from './routes/_authenticated/pps-admin'
+import { Route as ApiDigistoreIpnRouteImport } from './routes/api/digistore-ipn'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -51,6 +52,11 @@ const AuthenticatedPpsAdminRoute = AuthenticatedPpsAdminRouteImport.update({
   path: '/pps-admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiDigistoreIpnRoute = ApiDigistoreIpnRouteImport.update({
+  id: '/api/digistore-ipn',
+  path: '/api/digistore-ipn',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/members': typeof AuthenticatedMembersRoute
   '/pps-admin': typeof AuthenticatedPpsAdminRoute
+  '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/members': typeof AuthenticatedMembersRoute
   '/pps-admin': typeof AuthenticatedPpsAdminRoute
+  '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,13 +85,27 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_authenticated/members': typeof AuthenticatedMembersRoute
   '/_authenticated/pps-admin': typeof AuthenticatedPpsAdminRoute
+  '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/checkout' | '/login' | '/signup' | '/members' | '/pps-admin'
+    | '/'
+    | '/checkout'
+    | '/login'
+    | '/signup'
+    | '/members'
+    | '/pps-admin'
+    | '/api/digistore-ipn'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout' | '/login' | '/signup' | '/members' | '/pps-admin'
+  to:
+    | '/'
+    | '/checkout'
+    | '/login'
+    | '/signup'
+    | '/members'
+    | '/pps-admin'
+    | '/api/digistore-ipn'
   id:
     | '__root__'
     | '/'
@@ -93,6 +115,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_authenticated/members'
     | '/_authenticated/pps-admin'
+    | '/api/digistore-ipn'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -101,6 +124,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
+  ApiDigistoreIpnRoute: typeof ApiDigistoreIpnRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -154,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPpsAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/digistore-ipn': {
+      id: '/api/digistore-ipn'
+      path: '/api/digistore-ipn'
+      fullPath: '/api/digistore-ipn'
+      preLoaderRoute: typeof ApiDigistoreIpnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -176,6 +207,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
+  ApiDigistoreIpnRoute: ApiDigistoreIpnRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

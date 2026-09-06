@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,22 +32,12 @@ export const Route = createFileRoute("/")({
 });
 
 function GatePage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   async function goToContent() {
-    const { data: access } = await supabase
-      .from("user_access")
-      .select("has_access")
-      .maybeSingle();
-
-    if (access?.has_access) {
-      window.location.href = CONTENT_URL;
-      return;
-    }
-    router.navigate({ to: "/members" });
+    window.location.href = CONTENT_URL;
   }
 
   async function handleEmailLogin(e: React.FormEvent) {
