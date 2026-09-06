@@ -42,16 +42,7 @@ function LoginPage() {
 
     toast.success("Erfolgreich angemeldet");
 
-    const { data: access } = await supabase
-      .from("user_access")
-      .select("has_access")
-      .maybeSingle();
-
-    if (access?.has_access) {
-      window.location.href = "https://prophotoskills.github.io/content/";
-      return;
-    }
-    router.navigate({ to: "/members" });
+    window.location.href = "https://prophotoskills.github.io/content/";
   }
 
   return (

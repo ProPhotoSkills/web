@@ -38,16 +38,7 @@ function GatePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function goToContent() {
-    const { data: access } = await supabase
-      .from("user_access")
-      .select("has_access")
-      .maybeSingle();
-
-    if (access?.has_access) {
-      window.location.href = CONTENT_URL;
-      return;
-    }
-    router.navigate({ to: "/members" });
+    window.location.href = CONTENT_URL;
   }
 
   async function handleEmailLogin(e: React.FormEvent) {
