@@ -1,0 +1,10 @@
+# Verhindert, dass Cloudflare bei jedem neuen Deploy (ausgelöst durch GitHub-Push)
+# die im Dashboard gesetzten Runtime-Variablen und -Secrets löscht.
+# Ohne diese Zeile werden "Runtime variables and secrets" bei jedem Build resettet —
+# das ist Cloudflares Standardverhalten von "wrangler deploy", kein Bug.
+#
+# Alles andere (Name, Entry Point, Compatibility-Date) wird weiterhin automatisch
+# von @lovable.dev/vite-tanstack-config / Nitro generiert — hier NICHT ergänzen,
+# sonst Konflikt mit der automatisch erzeugten Konfiguration.
+
+keep_vars = true
