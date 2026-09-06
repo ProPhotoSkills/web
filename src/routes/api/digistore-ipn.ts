@@ -29,7 +29,7 @@ async function verifyDigistoreSignature(
   passphrase: string,
   params: Record<string, string>,
 ): Promise<boolean> {
-  const provided = params.sha_sign;
+  const provided = params['sha_sign'];
   if (!provided) return false;
 
   const entries = Object.entries(params).filter(([key, value]) => {
@@ -55,9 +55,9 @@ export const Route = createFileRoute("/api/digistore-ipn")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const passphrase = process.env.DIGISTORE_SHA_PASSPHRASE;
-        const supabaseUrl = process.env.SUPABASE_URL;
-        const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+        const passphrase = process.env['DIGISTORE_SHA_PASSPHRASE'];
+        const supabaseUrl = process.env['SUPABASE_URL'];
+        const serviceRoleKey = process.env['SUPABASE_SERVICE_ROLE_KEY'];
 
         if (!passphrase || !supabaseUrl || !serviceRoleKey) {
           console.error("[digistore-ipn] Fehlende Env-Variable(n)");
@@ -87,26 +87,26 @@ export const Route = createFileRoute("/api/digistore-ipn")({
         // Immer protokollieren — gültig oder nicht. Wichtig fürs Debuggen beim
         // Einrichten in Digistore24 (Testmodus, IPN-Log dort vergleichen).
         await supabaseAdmin.from("digistore_ipn_log").insert({
-          order_id: params.order_id ?? null,
-          email: params.email ?? params.buyer_email ?? null,
-          event: params.event ?? null,
+          order_id: params['order_id'] ?? null,
+          email: params['email'] ?? params['buyer_email'] ?? null,
+          event: params['event'] ?? null,
           signature_valid: signatureValid,
           payload: params,
         });
 
         if (!signatureValid) {
-          console.warn("[digistore-ipn] Ungültige Signatur", { order_id: params.order_id });
+          console.warn("[digistore-ipn] Ungültige Signatur", { order_id: params['order_id'] });
           return new Response("Invalid signature", { status: 401 });
         }
 
         // Nur auf erfolgreiche Zahlungen reagieren. Digistore24 schickt auch
         // andere Events (Rückerstattung, ausgebliebene Zahlung, Affiliate...).
-        if (params.event !== "on_payment") {
+        if (params['event'] !== "on_payment") {
           return new Response("OK");
         }
 
-        const email = params.email ?? params.buyer_email;
-        const orderId = params.order_id;
+        const email = params['email'] ?? params['buyer_email'];
+        const orderId = params['order_id'];
         if (!email || !orderId) {
           console.error("[digistore-ipn] email oder order_id fehlt im Payload");
           return new Response("Missing email/order_id", { status: 400 });
@@ -160,7 +160,7 @@ export const Route = createFileRoute("/api/digistore-ipn")({
             user_id: userId,
             has_access: true,
             digistore_order_id: orderId,
-            digistore_product_id: params.product_id ?? null,
+            digistore_product_id: params['product_id'] ?? null,
             granted_via: "digistore_ipn",
             granted_at: new Date().toISOString(),
           },
