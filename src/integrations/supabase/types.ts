@@ -14,9 +14,43 @@ export type Database = {
   }
   public: {
     Tables: {
+      digistore_ipn_log: {
+        Row: {
+          email: string | null
+          event: string | null
+          id: string
+          order_id: string | null
+          payload: Json
+          received_at: string
+          signature_valid: boolean
+        }
+        Insert: {
+          email?: string | null
+          event?: string | null
+          id?: string
+          order_id?: string | null
+          payload: Json
+          received_at?: string
+          signature_valid: boolean
+        }
+        Update: {
+          email?: string | null
+          event?: string | null
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          received_at?: string
+          signature_valid?: boolean
+        }
+        Relationships: []
+      }
       user_access: {
         Row: {
           created_at: string
+          digistore_order_id: string | null
+          digistore_product_id: string | null
+          granted_at: string | null
+          granted_via: string
           has_access: boolean
           id: string
           updated_at: string
@@ -24,6 +58,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          digistore_order_id?: string | null
+          digistore_product_id?: string | null
+          granted_at?: string | null
+          granted_via?: string
           has_access?: boolean
           id?: string
           updated_at?: string
@@ -31,6 +69,10 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          digistore_order_id?: string | null
+          digistore_product_id?: string | null
+          granted_at?: string | null
+          granted_via?: string
           has_access?: boolean
           id?: string
           updated_at?: string
