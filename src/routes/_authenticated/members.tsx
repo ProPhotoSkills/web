@@ -19,11 +19,6 @@ export const Route = createFileRoute("/_authenticated/members")({
   component: MembersPage,
 });
 
-type AccessRow = {
-  id: string;
-  user_id: string;
-  has_access: boolean;
-};
 
 function MembersPage() {
   useEffect(() => {
