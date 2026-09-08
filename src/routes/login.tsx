@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import heliBackground from "@/assets/heli-bg.webp.asset.json";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
@@ -44,8 +45,7 @@ function LoginPage() {
     <div
       className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
       style={{
-        backgroundImage:
-          "url('https://prophotoskills.github.io/pps-assets/images/TitelNextLevel_kk.jpg')",
+        backgroundImage: `url('${heliBackground.url}')`,
       }}
     >
       <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
