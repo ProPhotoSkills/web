@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
@@ -22,28 +21,25 @@ export const Route = createFileRoute("/login")({
   }),
   component: LoginPage,
 });
-
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   async function handleEmailLogin(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setIsLoading(false);
-
     if (error) {
       toast.error(error.message);
       return;
     }
-
     toast.success("Erfolgreich angemeldet");
-
-    window.location.href = "https://prophotoskills.github.io/content/";
+    // Vorher: direkter Sprung zur alten, öffentlichen content-Adresse.
+    // Jetzt: zu /members, das den Zugang prüft und über content-gate
+    // mit einem signierten Token weiterleitet.
+    window.location.href = "/members";
   }
-
   return (
     <div
       className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
@@ -53,7 +49,6 @@ function LoginPage() {
       }}
     >
       <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
-
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Willkommen zurück</CardTitle>
           <CardDescription>
@@ -88,14 +83,12 @@ function LoginPage() {
               {isLoading ? "Wird angemeldet..." : "Anmelden"}
             </Button>
           </form>
-
           <p className="text-center text-sm text-muted-foreground">
             Noch keinen Account?{" "}
             <Link to="/signup" className="font-medium text-primary hover:underline">
               Jetzt registrieren
             </Link>
           </p>
-
         </CardContent>
       </Card>
     </div>
