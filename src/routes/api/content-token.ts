@@ -44,10 +44,10 @@ export const Route = createFileRoute("/api/content-token")({
           return new Response("Unauthorized", { status: 401 });
         }
 
-        const supabaseUrl = process.env['SUPABASE_URL'];
-        const publishableKey = process.env['SUPABASE_PUBLISHABLE_KEY'];
-        const contentSecret = process.env['CONTENT_ACCESS_SECRET'];
-        const contentBaseUrl = process.env['CONTENT_BASE_URL'] ?? "https://content-gate.workers.dev";
+        const supabaseUrl = process.env.SUPABASE_URL;
+        const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+        const contentSecret = process.env.CONTENT_ACCESS_SECRET;
+        const contentBaseUrl = process.env.CONTENT_BASE_URL ?? "https://content-gate.workers.dev";
 
         if (!supabaseUrl || !publishableKey || !contentSecret) {
           console.error("[content-token] Fehlende Env-Variable(n)");
