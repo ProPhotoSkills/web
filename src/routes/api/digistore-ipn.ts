@@ -1,24 +1,33 @@
-// Digistore24 IPN-Webhook
+// Digistore24 IPN-Webhook (v3 — jetzt mit Zugriffsentzug)
 // Ablage: src/routes/api/digistore-ipn.ts
 //
-// Was hier passiert, bei jeder eingehenden Digistore24-Zahlungsbenachrichtigung:
-//   1) Signatur prüfen (SHA512, exakt nach Digistore24-eigenem Referenzverfahren)
-//   2) Rohdaten in digistore_ipn_log protokollieren (immer, auch bei ungültiger Signatur)
-//   3) Bei Event "on_payment": Supabase-Account per E-Mail anlegen/wiederfinden,
-//      dann has_access=true setzen
-//   4) Antwort exakt "OK" zurückgeben — nur dann sieht Digistore die Zustellung als erfolgreich an
+// Ereignisse, die aktiv behandelt werden:
+//   on_payment        → Account anlegen/finden, has_access = true
+//   last_paid_day     → has_access = false (Digistore24s offizielle Empfehlung
+//                        für sowohl Kündigung als auch Rückgabe — der Kunde
+//                        behält Zugriff bis zum Ende der bezahlten Periode,
+//                        erst DANN kommt dieses Ereignis)
+//   on_refund         → has_access = false (zusätzliche Absicherung)
+//   on_chargeback     → has_access = false (sofort, keine Kulanzfrist)
 //
-// Benötigte Secrets (in Lovable: Cloud → Secrets, oder Cloudflare Runtime-Variablen):
-//   DIGISTORE_SHA_PASSPHRASE   — die SHA-Passphrase aus deinem Digistore24-Vendor-Konto
-//   SUPABASE_URL               — schon vorhanden
-//   SUPABASE_SERVICE_ROLE_KEY  — NEU, siehe Hinweis unten
+// Bewusst NICHT behandelt (laut Digistore24-Doku falsch für Zugriffssperren):
+//   on_payment_missed → nur ein Zahlungsversuch schlägt fehl, kein Endzustand
+//   on_rebill_cancelled → Kunde hat gekündigt, behält aber Zugriff bis
+//                          last_paid_day
+//   alle anderen Events → werden geloggt, sonst ignoriert, Antwort "OK"
+//
+// Benötigte Secrets (Cloudflare Runtime-Variablen bei web):
+//   DIGISTORE_SHA_PASSPHRASE   — das "IPN-Kennwort" aus der Digistore24-Anbindung
+//   SUPABASE_URL
+//   SUPABASE_SERVICE_ROLE_KEY
 
 import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 
-// Digistore24 sendet die Weiterleitung nach der Aktivierung standardmäßig hierhin.
-// Sobald /activate existiert (Schritt 4), diese URL final bestätigen.
-const ACTIVATION_REDIRECT_URL = "https://pps-web-login.lovable.app/activate";
+const ACTIVATION_REDIRECT_URL = "https://web.prophotoskills.workers.dev/activate";
+
+const GRANT_EVENTS = new Set(["on_payment"]);
+const REVOKE_EVENTS = new Set(["last_paid_day", "on_refund", "on_chargeback"]);
 
 /**
  * Berechnet die SHA512-Signatur exakt nach Digistore24s eigenem Referenzverfahren:
@@ -29,7 +38,7 @@ async function verifyDigistoreSignature(
   passphrase: string,
   params: Record<string, string>,
 ): Promise<boolean> {
-  const provided = params['sha_sign'];
+  const provided = params["sha_sign"];
   if (!provided) return false;
 
   const entries = Object.entries(params).filter(([key, value]) => {
@@ -55,17 +64,15 @@ export const Route = createFileRoute("/api/digistore-ipn")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const passphrase = process.env['DIGISTORE_SHA_PASSPHRASE'];
-        const supabaseUrl = process.env['SUPABASE_URL'];
-        const serviceRoleKey = process.env['SUPABASE_SERVICE_ROLE_KEY'];
+        const passphrase = process.env["DIGISTORE_SHA_PASSPHRASE"];
+        const supabaseUrl = process.env["SUPABASE_URL"];
+        const serviceRoleKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
 
         if (!passphrase || !supabaseUrl || !serviceRoleKey) {
           console.error("[digistore-ipn] Fehlende Env-Variable(n)");
           return new Response("Server missing env", { status: 500 });
         }
 
-        // Digistore24 sendet die IPN wahlweise als POST-Formular oder mit
-        // Query-Parametern in der URL — beides abdecken.
         const contentType = request.headers.get("content-type") ?? "";
         let params: Record<string, string> = {};
         if (contentType.includes("application/x-www-form-urlencoded")) {
@@ -76,44 +83,62 @@ export const Route = createFileRoute("/api/digistore-ipn")({
           params = Object.fromEntries(url.searchParams);
         }
 
-        // service_role-Key: voller DB-Zugriff, umgeht RLS. Deshalb NIE im
-        // Frontend verwenden — nur hier, server-seitig.
         const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
           auth: { persistSession: false, autoRefreshToken: false },
         });
 
         const signatureValid = await verifyDigistoreSignature(passphrase, params);
+        const event = params["event"] ?? null;
 
-        // Immer protokollieren — gültig oder nicht. Wichtig fürs Debuggen beim
-        // Einrichten in Digistore24 (Testmodus, IPN-Log dort vergleichen).
         await supabaseAdmin.from("digistore_ipn_log").insert({
-          order_id: params['order_id'] ?? null,
-          email: params['email'] ?? params['buyer_email'] ?? null,
-          event: params['event'] ?? null,
+          order_id: params["order_id"] ?? null,
+          email: params["email"] ?? params["buyer_email"] ?? null,
+          event,
           signature_valid: signatureValid,
           payload: params,
         });
 
         if (!signatureValid) {
-          console.warn("[digistore-ipn] Ungültige Signatur", { order_id: params['order_id'] });
+          console.warn("[digistore-ipn] Ungültige Signatur", { order_id: params["order_id"] });
           return new Response("Invalid signature", { status: 401 });
         }
 
-        // Nur auf erfolgreiche Zahlungen reagieren. Digistore24 schickt auch
-        // andere Events (Rückerstattung, ausgebliebene Zahlung, Affiliate...).
-        if (params['event'] !== "on_payment") {
+        const orderId = params["order_id"];
+        const apiMode = params["api_mode"]; // 'live' oder 'test'
+
+        // Testbestellungen protokollieren wir (s.o.), aber nie in echte
+        // Freischaltungen/Sperren umsetzen.
+        if (apiMode === "test") {
           return new Response("OK");
         }
 
-        const email = params['email'] ?? params['buyer_email'];
-        const orderId = params['order_id'];
+        if (event && REVOKE_EVENTS.has(event)) {
+          if (!orderId) {
+            return new Response("OK"); // nichts zuzuordnen, aber kein Fehler
+          }
+          const { error: revokeError } = await supabaseAdmin
+            .from("user_access")
+            .update({ has_access: false, revoked_at: new Date().toISOString() })
+            .eq("digistore_order_id", orderId);
+          if (revokeError) {
+            console.error("[digistore-ipn] Zugriffsentzug fehlgeschlagen", revokeError.message);
+            return new Response(`DB error: ${revokeError.message}`, { status: 500 });
+          }
+          return new Response("OK");
+        }
+
+        if (!event || !GRANT_EVENTS.has(event)) {
+          // Alle anderen Ereignisse (on_payment_missed, on_rebill_cancelled,
+          // on_rebill_resumed, ...): bewusst keine Aktion, nur bestätigen.
+          return new Response("OK");
+        }
+
+        const email = params["email"] ?? params["buyer_email"];
         if (!email || !orderId) {
           console.error("[digistore-ipn] email oder order_id fehlt im Payload");
           return new Response("Missing email/order_id", { status: 400 });
         }
 
-        // Idempotenz: diese Order schon mal verarbeitet? (Digistore wiederholt
-        // fehlgeschlagene IPNs bis zu 20x über 10 Tage.)
         const { data: existingOrder } = await supabaseAdmin
           .from("user_access")
           .select("id")
@@ -123,9 +148,6 @@ export const Route = createFileRoute("/api/digistore-ipn")({
           return new Response("OK");
         }
 
-        // Bestehenden Account per E-Mail suchen, sonst per Einladung neu anlegen.
-        // Hinweis: listUsers() ist bei sehr vielen Nutzern (>1000) nicht mehr
-        // zuverlässig vollständig — für die aktuelle Nutzerzahl unproblematisch.
         const { data: userList, error: listError } = await supabaseAdmin.auth.admin.listUsers({
           perPage: 1000,
         });
@@ -153,16 +175,15 @@ export const Route = createFileRoute("/api/digistore-ipn")({
           userId = invited.user.id;
         }
 
-        // Zugriff freischalten. onConflict auf user_id, weil user_access dort
-        // einen UNIQUE-Constraint hat.
         const { error: upsertError } = await supabaseAdmin.from("user_access").upsert(
           {
             user_id: userId,
             has_access: true,
             digistore_order_id: orderId,
-            digistore_product_id: params['product_id'] ?? null,
+            digistore_product_id: params["product_id"] ?? null,
             granted_via: "digistore_ipn",
             granted_at: new Date().toISOString(),
+            revoked_at: null,
           },
           { onConflict: "user_id" },
         );
