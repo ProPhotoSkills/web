@@ -64,7 +64,7 @@ function GatePage() {
         backgroundImage: `url('${heliBackground.url}')`,
       }}
     >
-      <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:justify-center">
+      <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-6 md:flex-row md:items-start md:justify-center">
       <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
 
         <CardHeader className="text-center">
