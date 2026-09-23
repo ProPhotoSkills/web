@@ -18,6 +18,7 @@ import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedPpsAdminRouteImport } from './routes/_authenticated/pps-admin'
 import { Route as ApiContentTokenRouteImport } from './routes/api/content-token'
 import { Route as ApiDigistoreIpnRouteImport } from './routes/api/digistore-ipn'
+import { Route as ApiDigistoreLicenseRouteImport } from './routes/api/digistore-license'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -63,6 +64,11 @@ const ApiDigistoreIpnRoute = ApiDigistoreIpnRouteImport.update({
   path: '/api/digistore-ipn',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiDigistoreLicenseRoute = ApiDigistoreLicenseRouteImport.update({
+  id: '/api/digistore-license',
+  path: '/api/digistore-license',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/pps-admin': typeof AuthenticatedPpsAdminRoute
   '/api/content-token': typeof ApiContentTokenRoute
   '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
+  '/api/digistore-license': typeof ApiDigistoreLicenseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/pps-admin': typeof AuthenticatedPpsAdminRoute
   '/api/content-token': typeof ApiContentTokenRoute
   '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
+  '/api/digistore-license': typeof ApiDigistoreLicenseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/pps-admin': typeof AuthenticatedPpsAdminRoute
   '/api/content-token': typeof ApiContentTokenRoute
   '/api/digistore-ipn': typeof ApiDigistoreIpnRoute
+  '/api/digistore-license': typeof ApiDigistoreLicenseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/pps-admin'
     | '/api/content-token'
     | '/api/digistore-ipn'
+    | '/api/digistore-license'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/pps-admin'
     | '/api/content-token'
     | '/api/digistore-ipn'
+    | '/api/digistore-license'
   id:
     | '__root__'
     | '/'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pps-admin'
     | '/api/content-token'
     | '/api/digistore-ipn'
+    | '/api/digistore-license'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -138,6 +150,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   ApiContentTokenRoute: typeof ApiContentTokenRoute
   ApiDigistoreIpnRoute: typeof ApiDigistoreIpnRoute
+  ApiDigistoreLicenseRoute: typeof ApiDigistoreLicenseRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDigistoreIpnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/digistore-license': {
+      id: '/api/digistore-license'
+      path: '/api/digistore-license'
+      fullPath: '/api/digistore-license'
+      preLoaderRoute: typeof ApiDigistoreLicenseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -229,6 +249,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   ApiContentTokenRoute: ApiContentTokenRoute,
   ApiDigistoreIpnRoute: ApiDigistoreIpnRoute,
+  ApiDigistoreLicenseRoute: ApiDigistoreLicenseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

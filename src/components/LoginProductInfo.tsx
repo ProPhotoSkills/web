@@ -1,0 +1,43 @@
+/**
+ * Kleine Produkt-Erklärung rechts neben dem Login-Fenster
+ * (Breite = 2/3 des Login-Fensters). Text aus dem Memberbereich-Angebot.
+ */
+export function LoginProductInfo() {
+  return (
+    <aside className="w-full max-w-[19rem] rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm sm:max-w-[21rem]">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b33a26]">
+        Mitgliedschaft · Voller Systemzugang
+      </p>
+      <h2 className="mt-3 text-xl font-bold leading-tight">
+        Komme in deinen ProPhotoSkills Memberbereich
+      </h2>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        Hier wartet geballtes Fotografie-Know-how darauf, von dir entdeckt zu
+        werden. Mit deiner Mitgliedschaft erhältst du exklusiven Zugriff auf
+        Inhalte, die dich in allen Bereichen der Fotografie weiterbringen –
+        kompakt aufbereitet, praxisnah erklärt und sofort umsetzbar. Mit vielen
+        Beispielen und Tipps.
+      </p>
+
+      <div className="mt-5 border-t pt-4">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b33a26]">
+          Dein Zugang
+        </p>
+        <h3 className="mt-2 text-base font-bold leading-snug">
+          Zwei Systeme, ein Memberbereich
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Mit deiner Mitgliedschaft schaltest du beide ProPhotoSkills-
+          Wissenssysteme komplett frei – das umfassende Entwicklungssystem Next
+          Level und das spezialisierte Produktionssystem On Location.
+        </p>
+      </div>
+
+      <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+        Abo · 50,-/300,-€ · 6 Monate
+        <br />
+        Sofortiger Zugriff nach Kauf · Digistore24 Käuferschutz
+      </p>
+    </aside>
+  );
+}

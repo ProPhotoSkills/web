@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import heliBackground from "@/assets/heli-bg.webp.asset.json";
+import { LoginProductInfo } from "@/components/LoginProductInfo";
 
 const CONTENT_URL = "https://prophotoskills.github.io/content/";
 
@@ -63,6 +64,7 @@ function GatePage() {
         backgroundImage: `url('${heliBackground.url}')`,
       }}
     >
+      <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:justify-center">
       <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
 
         <CardHeader className="text-center">
@@ -109,6 +111,8 @@ function GatePage() {
 
         </CardContent>
       </Card>
+      <LoginProductInfo />
+      </div>
     </div>
   );
 }
