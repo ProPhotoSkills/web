@@ -21,7 +21,7 @@ export function LoginProductInfo() {
         </p>
       </aside>
 
-      <aside className="rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
+      <aside className="h-full rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b33a26]">
           Dein Zugang
         </p>
