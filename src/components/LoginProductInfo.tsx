@@ -4,8 +4,8 @@
  */
 export function LoginProductInfo() {
   return (
-    <div className="grid h-full w-full grid-cols-1 gap-6 sm:grid-cols-2 md:w-2/3">
-      <aside className="rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
+    <div className="grid h-full w-full grid-cols-1 gap-6 sm:grid-cols-2 md:col-span-2">
+      <aside className="h-full rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b33a26]">
           Mitgliedschaft · Voller Systemzugang
         </p>
@@ -21,7 +21,7 @@ export function LoginProductInfo() {
         </p>
       </aside>
 
-      <aside className="rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
+      <aside className="h-full rounded-xl border bg-card/90 p-6 text-card-foreground shadow-xl backdrop-blur-sm">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b33a26]">
           Dein Zugang
         </p>
