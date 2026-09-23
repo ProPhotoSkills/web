@@ -111,6 +111,8 @@ function GatePage() {
 
         </CardContent>
       </Card>
+      <LoginProductInfo />
+      </div>
     </div>
   );
 }
