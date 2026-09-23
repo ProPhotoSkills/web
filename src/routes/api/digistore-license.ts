@@ -17,8 +17,8 @@ export const Route = createFileRoute("/api/digistore-license")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const supabaseUrl = process.env.SUPABASE_URL;
-        const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+        const supabaseUrl = process.env['SUPABASE_URL'];
+        const serviceRoleKey = process.env['SUPABASE_SERVICE_ROLE_KEY'];
 
         const bodyText = await request.text();
         const params = Object.fromEntries(new URLSearchParams(bodyText));
@@ -31,8 +31,8 @@ export const Route = createFileRoute("/api/digistore-license")({
               auth: { persistSession: false, autoRefreshToken: false },
             });
             await supabaseAdmin.from("digistore_ipn_log").insert({
-              order_id: params.order_id ?? null,
-              email: params.email ?? null,
+              order_id: params['order_id'] ?? null,
+              email: params['email'] ?? null,
               event: "license_server_display_only",
               signature_valid: false,
               payload: params,
