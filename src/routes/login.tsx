@@ -93,6 +93,8 @@ function LoginPage() {
           </p>
         </CardContent>
       </Card>
+      <LoginProductInfo />
+      </div>
     </div>
   );
 }
