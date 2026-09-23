@@ -49,8 +49,8 @@ function LoginPage() {
         backgroundImage: `url('${heliBackground.url}')`,
       }}
     >
-      <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-6 md:flex-row md:items-start md:justify-center">
-      <Card className="w-full max-w-md shadow-xl backdrop-blur-sm">
+      <div className="flex w-full max-w-5xl flex-col items-center justify-center gap-6 md:flex-row md:items-start md:justify-center">
+      <Card className="w-full md:w-1/3 shadow-xl backdrop-blur-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Willkommen zurück</CardTitle>
           <CardDescription>
