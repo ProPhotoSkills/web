@@ -1,0 +1,122 @@
+import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { LoginProductInfo } from "@/components/LoginProductInfo";
+
+// Vorher: Import aus "@/assets/heli-bg.webp.asset.json" mit heliBackground.url —
+// das ergab einen Lovable-internen Pfad (/__l5e/assets-v1/...), der nur
+// innerhalb von Lovables eigenem Hosting aufgelöst wird. Auf Cloudflare lief
+// das Bild dadurch ins Leere. Stattdessen jetzt dieselbe zentrale Quelle wie
+// die übrigen Bilder im Projekt (pps-assets-Repo, öffentlich, für alle vier
+// Domains gemeinsam genutzt):
+const HELI_BACKGROUND_URL = "https://prophotoskills.github.io/pps-assets/images/heli-bg.webp";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Zugang – ProPhotoSkills" },
+      {
+        name: "description",
+        content: "Melde dich an, um deinen ProPhotoSkills-Kurs zu öffnen.",
+      },
+      { property: "og:title", content: "Zugang – ProPhotoSkills" },
+      {
+        property: "og:description",
+        content: "Melde dich an, um deinen ProPhotoSkills-Kurs zu öffnen.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://pps-web-login.lovable.app/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://pps-web-login.lovable.app/" }],
+  }),
+  component: GatePage,
+});
+
+function GatePage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleEmailLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setIsLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setIsLoading(false);
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Erfolgreich angemeldet");
+    // Vorher: direkter Sprung zur alten, toten content-Adresse (CONTENT_URL).
+    // Jetzt: zu /members, das den Zugang prüft und über content-gate mit
+    // einem signierten Token weiterleitet.
+    window.location.href = "/members";
+  }
+
+  return (
+    <div
+      className="relative flex flex-1 items-center justify-center bg-cover bg-center px-4 py-16"
+      style={{
+        backgroundImage: `url('${HELI_BACKGROUND_URL}')`,
+      }}
+    >
+      <div className="grid w-full max-w-5xl grid-cols-1 items-stretch justify-center gap-6 md:grid-cols-3">
+      <Card className="flex w-full flex-col shadow-xl backdrop-blur-sm">
+
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Willkommen bei ProPhotoSkills</CardTitle>
+          <CardDescription>
+            Melde dich an, um deinen Kurs zu öffnen.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <form onSubmit={handleEmailLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">E-Mail</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="du@beispiel.de"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Passwort</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Wird angemeldet..." : "Anmelden"}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-muted-foreground">
+            Noch keinen Account?{" "}
+            <Link to="/signup" className="font-medium text-primary hover:underline">
+              Jetzt registrieren
+            </Link>
+          </p>
+
+        </CardContent>
+      </Card>
+      <LoginProductInfo />
+      </div>
+    </div>
+  );
+}
