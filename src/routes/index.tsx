@@ -30,10 +30,10 @@ export const Route = createFileRoute("/")({
         content: "Melde dich an, um deinen ProPhotoSkills-Kurs zu öffnen.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://pps-web-login.lovable.app/" },
+      { property: "og:url", content: "https://web.prophotoskills.workers.dev/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://pps-web-login.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://web.prophotoskills.workers.dev/" }],
   }),
   component: GatePage,
 });
