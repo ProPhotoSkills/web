@@ -53,6 +53,7 @@ export type Database = {
           granted_via: string
           has_access: boolean
           id: string
+          revoked_at: string | null
           updated_at: string
           user_id: string
         }
@@ -64,6 +65,7 @@ export type Database = {
           granted_via?: string
           has_access?: boolean
           id?: string
+          revoked_at?: string | null
           updated_at?: string
           user_id: string
         }
@@ -75,6 +77,7 @@ export type Database = {
           granted_via?: string
           has_access?: boolean
           id?: string
+          revoked_at?: string | null
           updated_at?: string
           user_id?: string
         }
