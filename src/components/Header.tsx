@@ -15,15 +15,15 @@ const LANGS = [
 ] as const;
 
 const MENU_ITEMS = [
-  { label: "KNOWLEDGE", href: "https://prophotoskills.github.io/pps/knowledge/" },
-  { label: "TECHNIK", href: "https://prophotoskills.github.io/pps/technik/" },
-  { label: "PROGRESS", href: "https://prophotoskills.github.io/pps/progress/" },
-  { label: "SKILL", href: "https://prophotoskills.github.io/pps/skill/" },
-  { label: "PSYCHO", href: "https://prophotoskills.github.io/pps/psycho/" },
-  { label: "TRAVEL", href: "https://prophotoskills.github.io/pps/travel/" },
-  { label: "LOCATION", href: "https://prophotoskills.github.io/pps/location/" },
-  { label: "INSURANCE", href: "https://prophotoskills.github.io/pps/insurance/" },
-  { label: "EQUIPMENT", href: "https://prophotoskills.github.io/pps/equipment/" },
+  { label: "KNOWLEDGE", href: "https://prophotoskills.com/knowledge/" },
+  { label: "TECHNIK", href: "https://prophotoskills.com/technik/" },
+  { label: "PROGRESS", href: "https://prophotoskills.com/progress/" },
+  { label: "SKILL", href: "https://prophotoskills.com/skill/" },
+  { label: "PSYCHO", href: "https://prophotoskills.com/psycho/" },
+  { label: "TRAVEL", href: "https://prophotoskills.com/travel/" },
+  { label: "LOCATION", href: "https://prophotoskills.com/location/" },
+  { label: "INSURANCE", href: "https://prophotoskills.com/insurance/" },
+  { label: "EQUIPMENT", href: "https://prophotoskills.com/equipment/" },
 ] as const;
 
 
@@ -112,7 +112,7 @@ export function Header() {
     <header className="relative z-50 bg-[#f8e800] text-[#454545]">
       <div className="mx-auto grid min-h-[78px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-x-4 px-4 pb-1 pt-3 sm:px-6 lg:grid-cols-[minmax(260px,1fr)_auto] lg:gap-x-[clamp(1rem,4vw,3.5rem)] lg:px-32 lg:-translate-y-[1mm]">
         <a
-          href="https://prophotoskills.github.io/pps/"
+          href="https://prophotoskills.com/"
           target="_blank"
           rel="noreferrer"
           className="flex min-w-0 items-center self-center lg:translate-y-[1.5mm]"

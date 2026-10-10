@@ -35,7 +35,7 @@ export function PpsChromeFrame({
   // root-relative path would resolve against that host instead of the app.
   const doc = `<!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8">
-<base href="https://prophotoskills.github.io/pps/" target="_parent">
+<base href="https://prophotoskills.com/" target="_parent">
 <link rel="stylesheet" href="${PPS_FONTS}">
 <link rel="stylesheet" href="${origin}${PPS_CSS_PATH}">
 <style>html,body{margin:0;padding:0;overflow-x:hidden;background:${title === "Footer" ? "#4a4a4a" : "#f8e800"}}${extraCss}</style>
