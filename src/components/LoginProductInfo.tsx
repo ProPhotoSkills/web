@@ -34,7 +34,7 @@ export function LoginProductInfo() {
           Level und das spezialisierte Produktionssystem On Location.
         </p>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-          Abo · 50,-/300,-€ · 6 Monate
+          300 € · 50 € x 6 Monate zahlen · lifetime access
           <br />
           Sofortiger Zugriff nach Kauf · Digistore24 Käuferschutz
         </p>
